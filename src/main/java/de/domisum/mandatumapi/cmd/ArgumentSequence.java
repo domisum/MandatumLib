@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class ArgumentSequence
@@ -115,13 +114,6 @@ public class ArgumentSequence
 				return "The player with the name '" + arg + "' isn't currenly online ";
 		}
 
-		else if(clazz == OfflinePlayer.class)
-		{
-			if(arg.length() > 16)
-				return "The specified player name is longer than 16 characters";
-
-			// TODO is this validation enough?
-		}
 		else if(clazz == UUID.class)
 		{
 			if(!arg.toLowerCase().matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
