@@ -54,7 +54,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		MandatumAPI.getLogger().info("Registering subcommands of '" + getName() + "' ...");
 
 		List<Class<?>> classes = ClazzUtil.getClasses(getSubCommandsClassPath());
-		Map<String, Class<? extends MandatumSubCommand>> subCommandClasses = new HashMap<String, Class<? extends MandatumSubCommand>>();
+		Map<String, Class<? extends MandatumSubCommand>> subCommandClasses = new HashMap<>();
 		for(Class<?> c : classes)
 		{
 			if(!MandatumSubCommand.class.isAssignableFrom(c))
@@ -127,7 +127,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		if(!shouldExecute())
 			return;
 
-		List<String> subCommandArgs = new ArrayList<String>(this.args);
+		List<String> subCommandArgs = new ArrayList<>(this.args);
 		subCommandArgs.remove(0); // remove first arg since it is the name of the subcommand
 
 		// run subcommand

@@ -27,7 +27,7 @@ public class ArgumentSequence
 
 	public ArgumentSequence(String name, Class<?>... argumentClasses)
 	{
-		this(name, new ArrayList<Class<?>>(Arrays.asList(argumentClasses)));
+		this(name, new ArrayList<>(Arrays.asList(argumentClasses)));
 	}
 
 

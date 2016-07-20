@@ -21,8 +21,8 @@ public class MandatumCommandRegisterer
 	protected String classPath;
 
 	// REFERENCES
-	protected List<Class<? extends MandatumCommand>> commandClasses = new ArrayList<Class<? extends MandatumCommand>>();
-	protected Map<String, Class<? extends MandatumCommand>> commandsWithClasses = new HashMap<String, Class<? extends MandatumCommand>>();
+	protected List<Class<? extends MandatumCommand>> commandClasses = new ArrayList<>();
+	protected Map<String, Class<? extends MandatumCommand>> commandsWithClasses = new HashMap<>();
 
 
 	// -------
@@ -55,7 +55,7 @@ public class MandatumCommandRegisterer
 		// get all commands listed in plugin.yml
 		Set<String> pluginCommands = MandatumAPI.getInstance().getPlugin().getDescription().getCommands().keySet();
 		// the returned set is immutable, so just copy it
-		pluginCommands = new HashSet<String>(pluginCommands);
+		pluginCommands = new HashSet<>(pluginCommands);
 
 		// scan for the classes representing commands
 		List<Class<?>> classes = ClazzUtil.getClasses(this.classPath);

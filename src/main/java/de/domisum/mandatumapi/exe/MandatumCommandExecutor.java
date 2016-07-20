@@ -21,7 +21,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 {
 
 	// REFERENCES
-	protected Map<String, Class<? extends MandatumCommand>> commandClasses = new HashMap<String, Class<? extends MandatumCommand>>();
+	protected Map<String, Class<? extends MandatumCommand>> commandClasses = new HashMap<>();
 
 
 	// -------
@@ -101,7 +101,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 		}
 
 		// clone argumentSequences so the arraylist in the command class doesn't get altered
-		List<ArgumentSequence> fittingArgumentSequences = new ArrayList<ArgumentSequence>(command.getArgumentSequences());
+		List<ArgumentSequence> fittingArgumentSequences = new ArrayList<>(command.getArgumentSequences());
 		fittingArgumentSequences.removeIf((as) ->
 		{
 			// this takes messages in arguments into account
@@ -143,7 +143,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 
 	public void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, String[] args)
 	{
-		runCommand(commandClazz, sender, new ArrayList<String>(Arrays.asList(args)));
+		runCommand(commandClazz, sender, new ArrayList<>(Arrays.asList(args)));
 	}
 
 
