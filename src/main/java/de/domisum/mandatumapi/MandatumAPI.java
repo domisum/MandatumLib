@@ -28,6 +28,14 @@ public class MandatumAPI
 		onEnable();
 	}
 
+	public static void initialize(JavaPlugin plugin)
+	{
+		if(instance != null)
+			return;
+
+		new MandatumAPI(plugin);
+	}
+
 	public void onEnable()
 	{
 		this.commandExecutor = new MandatumCommandExecutor();
