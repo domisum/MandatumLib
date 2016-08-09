@@ -20,7 +20,7 @@ public class MandatumAPI
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public MandatumAPI(JavaPlugin plugin)
+	protected MandatumAPI(JavaPlugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -28,7 +28,7 @@ public class MandatumAPI
 		onEnable();
 	}
 
-	public static void initialize(JavaPlugin plugin)
+	public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -36,14 +36,23 @@ public class MandatumAPI
 		new MandatumAPI(plugin);
 	}
 
-	public void onEnable()
+	public static void disable()
+	{
+		if(instance == null)
+			return;
+
+		getInstance().onDisable();
+		instance = null;
+	}
+
+	protected void onEnable()
 	{
 		this.commandExecutor = new MandatumCommandExecutor();
 
 		getLogger().info(this.getClass().getSimpleName() + " has been enabled");
 	}
 
-	public void onDisable()
+	protected void onDisable()
 	{
 		getLogger().info(this.getClass().getSimpleName() + " has been disabled");
 	}
