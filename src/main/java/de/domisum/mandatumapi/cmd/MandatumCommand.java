@@ -55,7 +55,7 @@ public abstract class MandatumCommand
 
 	protected String getSenderName()
 	{
-		return this.sender != null ? ("'" + this.sender.getName() + "'") : "the console";
+		return this.sender != null ? ("'"+this.sender.getName()+"'") : "the console";
 	}
 
 
@@ -63,7 +63,7 @@ public abstract class MandatumCommand
 	{
 		String message = "";
 		for(int i = startArgsIndex; i < this.args.size(); i++)
-			message += this.args.get(i) + ((i + 1) != this.args.size() ? " " : "");
+			message += this.args.get(i)+((i+1) != this.args.size() ? " " : "");
 
 		return message;
 	}
@@ -92,7 +92,7 @@ public abstract class MandatumCommand
 
 	public void sendUsageMessage()
 	{
-		sendMessage("The command format is wrong: " + getUsage());
+		sendMessage("The command format is wrong: "+getUsage());
 	}
 
 

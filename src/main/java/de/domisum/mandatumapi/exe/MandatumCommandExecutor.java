@@ -102,7 +102,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 
 		// clone argumentSequences so the arraylist in the command class doesn't get altered
 		List<ArgumentSequence> fittingArgumentSequences = new ArrayList<>(command.getArgumentSequences());
-		fittingArgumentSequences.removeIf((as) ->
+		fittingArgumentSequences.removeIf((as)->
 		{
 			// this takes messages in arguments into account
 			return !as.doesArgumentLengthFit(args);
@@ -160,8 +160,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 			constructor = commandClazz.getConstructor(CommandSender.class, List.class);
 			command = constructor.newInstance(sender, args);
 		}
-		catch(NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e)
+		catch(NoSuchMethodException|SecurityException|InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException e)
 		{
 			e.printStackTrace();
 		}

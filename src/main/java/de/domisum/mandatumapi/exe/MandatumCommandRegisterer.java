@@ -50,7 +50,7 @@ public class MandatumCommandRegisterer
 	// -------
 	protected void register()
 	{
-		MandatumAPI.getLogger().info("Registering commands at '" + this.classPath + "' ...");
+		MandatumAPI.getLogger().info("Registering commands at '"+this.classPath+"' ...");
 
 		// get all commands listed in plugin.yml
 		Set<String> pluginCommands = MandatumAPI.getInstance().getPlugin().getDescription().getCommands().keySet();
@@ -71,7 +71,7 @@ public class MandatumCommandRegisterer
 			}
 			else
 				MandatumAPI.getLogger().warning(
-						"Found class '" + clazz.getName() + "' in command package that isn't a command. It has been skipped");
+						"Found class '"+clazz.getName()+"' in command package that isn't a command. It has been skipped");
 
 		// loop through found classes and register each command
 		for(Class<? extends MandatumCommand> cmdClazz : this.commandClasses)
@@ -82,7 +82,7 @@ public class MandatumCommandRegisterer
 			if(!pluginCommands.contains(commandName))
 			{
 				MandatumAPI.getLogger()
-						.severe("The command '" + commandName + "' is represented by a class but not listed in the plugin.yml");
+						.severe("The command '"+commandName+"' is represented by a class but not listed in the plugin.yml");
 
 				continue;
 			}
@@ -94,9 +94,9 @@ public class MandatumCommandRegisterer
 		// message about the commands that weren't present as classes
 		for(String commandName : pluginCommands)
 			MandatumAPI.getLogger()
-					.severe("The command '" + commandName + "' is present in the plugin.yml but wasn't represented as a class");
+					.severe("The command '"+commandName+"' is present in the plugin.yml but wasn't represented as a class");
 
-		MandatumAPI.getLogger().info("Registering commands at '" + this.classPath + "' done");
+		MandatumAPI.getLogger().info("Registering commands at '"+this.classPath+"' done");
 	}
 
 	protected void registerCommand(Class<? extends MandatumCommand> commandClazz, String commandName)
@@ -111,7 +111,7 @@ public class MandatumCommandRegisterer
 		}
 
 		this.commandsWithClasses.put(commandName, commandClazz);
-		MandatumAPI.getLogger().info("The command '" + commandName + "' has been registered");
+		MandatumAPI.getLogger().info("The command '"+commandName+"' has been registered");
 	}
 
 
@@ -127,8 +127,7 @@ public class MandatumCommandRegisterer
 		{
 			command = commandClazz.getConstructor().newInstance();
 		}
-		catch(InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e)
+		catch(InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e)
 		{
 			e.printStackTrace();
 		}

@@ -49,12 +49,12 @@ public class MandatumAPI
 	{
 		this.commandExecutor = new MandatumCommandExecutor();
 
-		getLogger().info(this.getClass().getSimpleName() + " has been enabled");
+		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
 	}
 
 	protected void onDisable()
 	{
-		getLogger().info(this.getClass().getSimpleName() + " has been disabled");
+		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
 	}
 
 

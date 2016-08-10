@@ -47,7 +47,7 @@ public class ArgumentSequence
 	{
 		// message at the end of the command
 		if(this.argumentClasses.size() > 0)
-			if(this.argumentClasses.get(this.argumentClasses.size() - 1) == ArgumentMessage.class)
+			if(this.argumentClasses.get(this.argumentClasses.size()-1) == ArgumentMessage.class)
 				// message has to be at leas one long
 				return args.size() >= this.argumentClasses.size();
 
@@ -58,8 +58,7 @@ public class ArgumentSequence
 	 * Checks if the provided arguments fit the set arguments of this object. If this is not the case, an error message is
 	 * returned to be displayed to the command dispatcher. If no error message is returned, the arguments are valid.
 	 *
-	 * @param args
-	 *            the arguments of the command
+	 * @param args the arguments of the command
 	 * @return the error message
 	 */
 	public String validate(List<String> args)
@@ -111,16 +110,16 @@ public class ArgumentSequence
 		{
 			Player player = Bukkit.getPlayer(arg);
 			if(player == null)
-				return "The player with the name '" + arg + "' isn't currenly online ";
+				return "The player with the name '"+arg+"' isn't currenly online ";
 		}
 
 		else if(clazz == UUID.class)
 		{
 			if(!arg.toLowerCase().matches("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"))
-				return "The uuid '" + arg + "' is invalid";
+				return "The uuid '"+arg+"' is invalid";
 		}
 		else
-			throw new RuntimeException("The class '" + clazz.getName() + "' has not been added to the validation method");
+			throw new RuntimeException("The class '"+clazz.getName()+"' has not been added to the validation method");
 
 		return null;
 	}
