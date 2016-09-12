@@ -1,16 +1,15 @@
 package de.domisum.lib.mandatum.cmd;
 
+import de.domisum.lib.auxilium.util.java.ClazzUtil;
+import de.domisum.lib.mandatum.MandatumLib;
+import org.bukkit.command.CommandSender;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.bukkit.command.CommandSender;
-
-import de.domisum.auxiliumapi.util.java.ClazzUtil;
-import de.domisum.lib.mandatum.MandatumLib;
 
 public abstract class MandatumSuperCommand extends MandatumCommand
 {

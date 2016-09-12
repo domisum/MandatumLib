@@ -1,5 +1,11 @@
 package de.domisum.lib.mandatum.exe;
 
+import de.domisum.lib.auxilium.util.java.ClazzUtil;
+import de.domisum.lib.mandatum.MandatumLib;
+import de.domisum.lib.mandatum.cmd.MandatumCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSubCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,12 +13,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import de.domisum.auxiliumapi.util.java.ClazzUtil;
-import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
-import de.domisum.lib.mandatum.MandatumLib;
-import de.domisum.lib.mandatum.cmd.MandatumCommand;
-import de.domisum.lib.mandatum.cmd.MandatumSubCommand;
 
 public class MandatumCommandRegisterer
 {
