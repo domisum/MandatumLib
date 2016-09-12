@@ -1,11 +1,11 @@
-package de.domisum.mandatumapi.cmd;
+package de.domisum.lib.mandatum.cmd;
 
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.domisum.mandatumapi.MandatumAPI;
+import de.domisum.lib.mandatum.MandatumLib;
 
 public abstract class MandatumCommand
 {
@@ -87,7 +87,7 @@ public abstract class MandatumCommand
 			this.sender.sendMessage(message);
 		else
 			// send to console
-			MandatumAPI.getLogger().info(message);
+			MandatumLib.getLogger().info(message);
 	}
 
 	public void sendUsageMessage()

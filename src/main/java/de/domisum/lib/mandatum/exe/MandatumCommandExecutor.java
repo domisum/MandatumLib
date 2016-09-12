@@ -1,4 +1,4 @@
-package de.domisum.mandatumapi.exe;
+package de.domisum.lib.mandatum.exe;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,9 +13,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import de.domisum.mandatumapi.cmd.ArgumentSequence;
-import de.domisum.mandatumapi.cmd.MandatumCommand;
-import de.domisum.mandatumapi.cmd.MandatumSuperCommand;
+import de.domisum.lib.mandatum.cmd.ArgumentSequence;
+import de.domisum.lib.mandatum.cmd.MandatumCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
 
 public class MandatumCommandExecutor implements CommandExecutor
 {

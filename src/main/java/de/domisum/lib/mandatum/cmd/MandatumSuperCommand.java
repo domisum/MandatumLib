@@ -1,4 +1,4 @@
-package de.domisum.mandatumapi.cmd;
+package de.domisum.lib.mandatum.cmd;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import org.bukkit.command.CommandSender;
 
 import de.domisum.auxiliumapi.util.java.ClazzUtil;
-import de.domisum.mandatumapi.MandatumAPI;
+import de.domisum.lib.mandatum.MandatumLib;
 
 public abstract class MandatumSuperCommand extends MandatumCommand
 {
@@ -51,7 +51,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	@SuppressWarnings("unchecked")
 	protected Map<String, Class<? extends MandatumSubCommand>> findSubCommands()
 	{
-		MandatumAPI.getLogger().info("Registering subcommands of '"+getName()+"' ...");
+		MandatumLib.getLogger().info("Registering subcommands of '"+getName()+"' ...");
 
 		List<Class<?>> classes = ClazzUtil.getClasses(getSubCommandsClassPath());
 		Map<String, Class<? extends MandatumSubCommand>> subCommandClasses = new HashMap<>();
@@ -59,7 +59,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		{
 			if(!MandatumSubCommand.class.isAssignableFrom(c))
 			{
-				MandatumAPI.getLogger().warning(
+				MandatumLib.getLogger().warning(
 						"Found class '"+c.getName()+"' in subcommand package that isn't a subcommand. It has been skipped");
 				continue;
 			}
@@ -76,17 +76,17 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 
 			if(!subCommand.getSuperCommandName().equalsIgnoreCase(getName()))
 			{
-				MandatumAPI.getLogger()
+				MandatumLib.getLogger()
 						.severe("The subcommand '"+c.getName()+"' belongs to the command '"+subCommand.getSuperCommandName()
 								+"', not '"+getName()+"'");
 				continue;
 			}
 
 			subCommandClasses.put(subCommand.getName().toLowerCase(), (Class<? extends MandatumSubCommand>) c);
-			MandatumAPI.getLogger().info("Registered subcommands '"+subCommand.getName()+"'");
+			MandatumLib.getLogger().info("Registered subcommands '"+subCommand.getName()+"'");
 		}
 
-		MandatumAPI.getLogger().info("Registering subcommands of '"+getName()+"' done");
+		MandatumLib.getLogger().info("Registering subcommands of '"+getName()+"' done");
 
 		return subCommandClasses;
 	}
@@ -133,7 +133,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		// run subcommand
 		// if the command was sent by console sender is null, but this is not important since the sender of the subcommand will be
 		// null again anyways, since instanceof can handle null
-		MandatumAPI.getCommandExecutor().runCommand(subCommand, this.sender, subCommandArgs);
+		MandatumLib.getCommandExecutor().runCommand(subCommand, this.sender, subCommandArgs);
 	}
 
 	protected abstract boolean shouldExecute();

@@ -1,4 +1,4 @@
-package de.domisum.mandatumapi.exe;
+package de.domisum.lib.mandatum.exe;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -9,10 +9,10 @@ import java.util.Map;
 import java.util.Set;
 
 import de.domisum.auxiliumapi.util.java.ClazzUtil;
-import de.domisum.mandatumapi.MandatumAPI;
-import de.domisum.mandatumapi.cmd.MandatumCommand;
-import de.domisum.mandatumapi.cmd.MandatumSubCommand;
-import de.domisum.mandatumapi.cmd.MandatumSuperCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
+import de.domisum.lib.mandatum.MandatumLib;
+import de.domisum.lib.mandatum.cmd.MandatumCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSubCommand;
 
 public class MandatumCommandRegisterer
 {
@@ -50,10 +50,10 @@ public class MandatumCommandRegisterer
 	// -------
 	protected void register()
 	{
-		MandatumAPI.getLogger().info("Registering commands at '"+this.classPath+"' ...");
+		MandatumLib.getLogger().info("Registering commands at '"+this.classPath+"' ...");
 
 		// get all commands listed in plugin.yml
-		Set<String> pluginCommands = MandatumAPI.getInstance().getPlugin().getDescription().getCommands().keySet();
+		Set<String> pluginCommands = MandatumLib.getInstance().getPlugin().getDescription().getCommands().keySet();
 		// the returned set is immutable, so just copy it
 		pluginCommands = new HashSet<>(pluginCommands);
 
@@ -70,7 +70,7 @@ public class MandatumCommandRegisterer
 				this.commandClasses.add(commandClazz);
 			}
 			else
-				MandatumAPI.getLogger().warning(
+				MandatumLib.getLogger().warning(
 						"Found class '"+clazz.getName()+"' in command package that isn't a command. It has been skipped");
 
 		// loop through found classes and register each command
@@ -81,7 +81,7 @@ public class MandatumCommandRegisterer
 			// check if the command is also in the plugin.yml and remove it from the list, marking it as found
 			if(!pluginCommands.contains(commandName))
 			{
-				MandatumAPI.getLogger()
+				MandatumLib.getLogger()
 						.severe("The command '"+commandName+"' is represented by a class but not listed in the plugin.yml");
 
 				continue;
@@ -93,16 +93,16 @@ public class MandatumCommandRegisterer
 
 		// message about the commands that weren't present as classes
 		for(String commandName : pluginCommands)
-			MandatumAPI.getLogger()
+			MandatumLib.getLogger()
 					.severe("The command '"+commandName+"' is present in the plugin.yml but wasn't represented as a class");
 
-		MandatumAPI.getLogger().info("Registering commands at '"+this.classPath+"' done");
+		MandatumLib.getLogger().info("Registering commands at '"+this.classPath+"' done");
 	}
 
 	protected void registerCommand(Class<? extends MandatumCommand> commandClazz, String commandName)
 	{
 		// register command executor
-		MandatumAPI.getInstance().getPlugin().getCommand(commandName).setExecutor(MandatumAPI.getCommandExecutor());
+		MandatumLib.getInstance().getPlugin().getCommand(commandName).setExecutor(MandatumLib.getCommandExecutor());
 
 		if(MandatumSuperCommand.class.isAssignableFrom(commandClazz))
 		{
@@ -111,7 +111,7 @@ public class MandatumCommandRegisterer
 		}
 
 		this.commandsWithClasses.put(commandName, commandClazz);
-		MandatumAPI.getLogger().info("The command '"+commandName+"' has been registered");
+		MandatumLib.getLogger().info("The command '"+commandName+"' has been registered");
 	}
 
 

@@ -1,4 +1,4 @@
-package de.domisum.mandatumapi.cmd;
+package de.domisum.lib.mandatum.cmd;
 
 import java.util.ArrayList;
 import java.util.Arrays;

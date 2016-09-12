@@ -1,17 +1,16 @@
-package de.domisum.mandatumapi;
+package de.domisum.lib.mandatum;
 
 import java.util.logging.Logger;
 
+import de.domisum.lib.mandatum.exe.MandatumCommandExecutor;
+import de.domisum.lib.mandatum.exe.MandatumCommandRegisterer;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.domisum.mandatumapi.exe.MandatumCommandExecutor;
-import de.domisum.mandatumapi.exe.MandatumCommandRegisterer;
-
-public class MandatumAPI
+public class MandatumLib
 {
 
 	// REFERENCES
-	private static MandatumAPI instance;
+	private static MandatumLib instance;
 	private JavaPlugin plugin;
 
 	protected MandatumCommandExecutor commandExecutor;
@@ -20,7 +19,7 @@ public class MandatumAPI
 	// -------
 	// CONSTRUCTOR
 	// -------
-	protected MandatumAPI(JavaPlugin plugin)
+	protected MandatumLib(JavaPlugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -33,7 +32,7 @@ public class MandatumAPI
 		if(instance != null)
 			return;
 
-		new MandatumAPI(plugin);
+		new MandatumLib(plugin);
 	}
 
 	public static void disable()
@@ -61,7 +60,7 @@ public class MandatumAPI
 	// -------
 	// GETTERS
 	// -------
-	public static MandatumAPI getInstance()
+	public static MandatumLib getInstance()
 	{
 		return instance;
 	}
