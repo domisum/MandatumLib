@@ -38,7 +38,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 	// -------
 	public void addCommandClasses(Map<String, Class<? extends MandatumCommand>> newCommandClasses)
 	{
-		// to lowercase so the the madwp can be searched by the lowercase commandname
+		// to lowercase so the the map can be searched by the lowercase commandname
 		for(Entry<String, Class<? extends MandatumCommand>> entry : newCommandClasses.entrySet())
 			this.commandClasses.put(entry.getKey().toLowerCase(), entry.getValue());
 	}
