@@ -23,7 +23,8 @@ public abstract class MandatumCommand
 	// -------
 	// CONSTRUCTOR
 	// -------
-	MandatumCommand(CommandSender commandSender, List<String> args)
+	@APIUsage
+	protected MandatumCommand(CommandSender commandSender, List<String> args)
 	{
 		if(commandSender instanceof Player)
 			this.sender = (Player) commandSender;
