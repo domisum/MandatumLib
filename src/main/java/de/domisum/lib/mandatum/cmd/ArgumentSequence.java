@@ -13,9 +13,9 @@ import java.util.UUID;
  * Used to define the combinations of arguments that a command accepts.
  * <p>
  * <p>
- * Example: /heal [player] <health>
- * This command would accept the following argument sequences:
- * - new ArgumentSequence("withPlayer", Player.class, Double.class)
+ * Example: /heal [player] &lt;health&gt;
+ * This command would accept the following argument sequences:<p>
+ * - new ArgumentSequence("withPlayer", Player.class, Double.class)<p>
  * - new ArgumentSequence("onSelf", Double.class)
  * <p>
  * When a command executes, the name of the selected ArgumentSequence will be accessible
@@ -123,6 +123,20 @@ public class ArgumentSequence
 		return null;
 	}
 
+	/**
+	 * This method checks whether a supplied argument String fits the supplied class.
+	 * This doesn't always purely check if the String could be cast/converted to the type of the class.
+	 * For example it checks for Player.class whether the player is currently on the server.
+	 * <p>
+	 * The method returns a error message if the argument doesn't fit its template, if it properly fits, null is returned.
+	 * A special case of error message is the empty String: "". If this is returned, the provided argument just simply doesn't
+	 * fit the template and the standard message telling the player how to use the command should be displayed instead of
+	 * a special error message.
+	 *
+	 * @param clazz the class that the argument has to fit
+	 * @param arg   the argument
+	 * @return error message, if one occured
+	 */
 	private String validate(Class<?> clazz, String arg)
 	{
 		// this returns "" when the argument is just straight out wrong. The message will be replaced by the usage message in the
@@ -176,7 +190,19 @@ public class ArgumentSequence
 	// -------
 
 	/**
+	 * This is just a "symbolic" class provided to use as an element in the ArgumentSequence. If it is used, the command will accept a varied number of arguments.
+	 * It still requires at least one argument to work, but from there no limits are set.
 	 * Currently only supported as the last argument for clarity purposes.
+	 * <p>
+	 * Example: /ban &lt;player&gt; [ban reason]<p>
+	 * The ArgumentSequence for this command would be: new ArgumentSequence(Player.class, ArgumentMessage.class);
+	 * <p>
+	 * This accepts commands like that:<p>
+	 * - "/ban domisum Fly Hack" <p>
+	 * - "/ban Notch idk"
+	 * <p>
+	 * But it doesn't allow:
+	 * - "/ban Notch"
 	 */
 	@APIUsage
 	public class ArgumentMessage
