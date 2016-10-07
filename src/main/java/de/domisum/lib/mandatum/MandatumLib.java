@@ -1,10 +1,11 @@
 package de.domisum.lib.mandatum;
 
-import java.util.logging.Logger;
-
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.mandatum.exe.MandatumCommandExecutor;
 import de.domisum.lib.mandatum.exe.MandatumCommandRegisterer;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Logger;
 
 public class MandatumLib
 {
@@ -13,13 +14,13 @@ public class MandatumLib
 	private static MandatumLib instance;
 	private JavaPlugin plugin;
 
-	protected MandatumCommandExecutor commandExecutor;
+	private MandatumCommandExecutor commandExecutor;
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	protected MandatumLib(JavaPlugin plugin)
+	private MandatumLib(JavaPlugin plugin)
 	{
 		instance = this;
 		this.plugin = plugin;
@@ -27,6 +28,7 @@ public class MandatumLib
 		onEnable();
 	}
 
+	@APIUsage
 	public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
@@ -35,6 +37,7 @@ public class MandatumLib
 		new MandatumLib(plugin);
 	}
 
+	@APIUsage
 	public static void disable()
 	{
 		if(instance == null)
@@ -44,14 +47,14 @@ public class MandatumLib
 		instance = null;
 	}
 
-	protected void onEnable()
+	private void onEnable()
 	{
 		this.commandExecutor = new MandatumCommandExecutor();
 
 		getLogger().info(this.getClass().getSimpleName()+" has been enabled");
 	}
 
-	protected void onDisable()
+	private void onDisable()
 	{
 		getLogger().info(this.getClass().getSimpleName()+" has been disabled");
 	}
@@ -85,10 +88,11 @@ public class MandatumLib
 	// -------
 	// REGISTERING
 	// -------
-	public void registerCommands(String classPath)
+	@APIUsage
+	public static void registerCommands(String classPath)
 	{
 		MandatumCommandRegisterer registerer = new MandatumCommandRegisterer(classPath);
-		this.commandExecutor.addCommandClasses(registerer.getCommandClasses());
+		getInstance().commandExecutor.addCommandClasses(registerer.getCommandClasses());
 	}
 
 }

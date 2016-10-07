@@ -18,11 +18,11 @@ public class MandatumCommandRegisterer
 {
 
 	// PROPERTIES
-	protected String classPath;
+	private String classPath;
 
 	// REFERENCES
-	protected List<Class<? extends MandatumCommand>> commandClasses = new ArrayList<>();
-	protected Map<String, Class<? extends MandatumCommand>> commandsWithClasses = new HashMap<>();
+	private List<Class<? extends MandatumCommand>> commandClasses = new ArrayList<>();
+	private Map<String, Class<? extends MandatumCommand>> commandsWithClasses = new HashMap<>();
 
 
 	// -------
@@ -48,7 +48,7 @@ public class MandatumCommandRegisterer
 	// -------
 	// SCANNING
 	// -------
-	protected void register()
+	private void register()
 	{
 		MandatumLib.getLogger().info("Registering commands at '"+this.classPath+"' ...");
 
@@ -59,6 +59,9 @@ public class MandatumCommandRegisterer
 
 		// scan for the classes representing commands
 		List<Class<?>> classes = ClazzUtil.getClasses(this.classPath);
+		if(classes == null)
+			return;
+
 		for(Class<?> clazz : classes)
 			if(MandatumCommand.class.isAssignableFrom(clazz))
 			{
@@ -99,7 +102,7 @@ public class MandatumCommandRegisterer
 		MandatumLib.getLogger().info("Registering commands at '"+this.classPath+"' done");
 	}
 
-	protected void registerCommand(Class<? extends MandatumCommand> commandClazz, String commandName)
+	private void registerCommand(Class<? extends MandatumCommand> commandClazz, String commandName)
 	{
 		// register command executor
 		MandatumLib.getInstance().getPlugin().getCommand(commandName).setExecutor(MandatumLib.getCommandExecutor());
@@ -115,12 +118,12 @@ public class MandatumCommandRegisterer
 	}
 
 
-	protected static String getCommandName(Class<? extends MandatumCommand> commandClazz)
+	private static String getCommandName(Class<? extends MandatumCommand> commandClazz)
 	{
 		return getCommand(commandClazz).getName();
 	}
 
-	protected static MandatumCommand getCommand(Class<? extends MandatumCommand> commandClazz)
+	private static MandatumCommand getCommand(Class<? extends MandatumCommand> commandClazz)
 	{
 		MandatumCommand command = null;
 		try

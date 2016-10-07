@@ -1,6 +1,7 @@
 package de.domisum.lib.mandatum.cmd;
 
 import de.domisum.lib.auxilium.util.java.ClazzUtil;
+import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.mandatum.MandatumLib;
 import org.bukkit.command.CommandSender;
 
@@ -17,11 +18,6 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	// -------
 	// CONSTRUCTOR
 	// -------
-	public MandatumSuperCommand()
-	{
-
-	}
-
 	public MandatumSuperCommand(CommandSender commandSender, List<String> args)
 	{
 		super(commandSender, args);
@@ -45,6 +41,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		return null;
 	}
 
+	@APIUsage
 	public abstract String getSubCommandsClassPath();
 
 	@SuppressWarnings("unchecked")
@@ -135,6 +132,12 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		MandatumLib.getCommandExecutor().runCommand(subCommand, this.sender, subCommandArgs);
 	}
 
+	/**
+	 * Not 100% sure for what this method is used for, but I don't want to delete it yet
+	 *
+	 * @return if the subcommand should be executed
+	 */
+	@APIUsage
 	protected abstract boolean shouldExecute();
 
 }

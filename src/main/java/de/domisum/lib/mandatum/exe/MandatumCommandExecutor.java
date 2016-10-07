@@ -1,5 +1,12 @@
 package de.domisum.lib.mandatum.exe;
 
+import de.domisum.lib.mandatum.cmd.ArgumentSequence;
+import de.domisum.lib.mandatum.cmd.MandatumCommand;
+import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -9,19 +16,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-
-import de.domisum.lib.mandatum.cmd.ArgumentSequence;
-import de.domisum.lib.mandatum.cmd.MandatumCommand;
-import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
-
 public class MandatumCommandExecutor implements CommandExecutor
 {
 
 	// REFERENCES
-	protected Map<String, Class<? extends MandatumCommand>> commandClasses = new HashMap<>();
+	private Map<String, Class<? extends MandatumCommand>> commandClasses = new HashMap<>();
 
 
 	// -------
@@ -135,13 +134,13 @@ public class MandatumCommandExecutor implements CommandExecutor
 
 		// the validator returns "" if the argument just doesn't fit, like a string instead of integer
 		// so this means just return the standard error message
-		if(highestPriorityValidationError.equals(""))
+		if("".equals(highestPriorityValidationError))
 			command.sendUsageMessage();
 		else
 			command.sendMessage(highestPriorityValidationError);
 	}
 
-	public void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, String[] args)
+	private void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, String[] args)
 	{
 		runCommand(commandClazz, sender, new ArrayList<>(Arrays.asList(args)));
 	}
@@ -150,9 +149,9 @@ public class MandatumCommandExecutor implements CommandExecutor
 	// -------
 	// EXECUTION
 	// -------
-	public MandatumCommand getCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, List<String> args)
+	private MandatumCommand getCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, List<String> args)
 	{
-		Constructor<? extends MandatumCommand> constructor = null;
+		Constructor<? extends MandatumCommand> constructor;
 		MandatumCommand command = null;
 
 		try
