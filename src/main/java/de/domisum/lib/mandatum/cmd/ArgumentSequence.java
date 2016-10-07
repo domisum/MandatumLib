@@ -13,15 +13,15 @@ import java.util.UUID;
  * Used to define the combinations of arguments that a command accepts.
  * <p>
  * <p>
- * Example: /heal [player] &lt;health&gt;
+ * Example: {@code /heal [player] <health>}
  * This command would accept the following argument sequences:<p>
- * - new ArgumentSequence("withPlayer", Player.class, Double.class)<p>
- * - new ArgumentSequence("onSelf", Double.class)
+ * - {@code new ArgumentSequence("withPlayer", Player.class, Double.class)}<p>
+ * - {@code new ArgumentSequence("onSelf", Double.class)}
  * <p>
  * When a command executes, the name of the selected ArgumentSequence will be accessible
- * in the String "argumentSequenceName" in the command object.
+ * in the {@code String argumentSequenceName} in the command object.
  * <p>
- * Example: The player enters "/heal 10"
+ * Example: The player enters {@code /heal 10}
  * Then the argumentSequenceName in the Command object will be "onSelf".
  * This String can now be used to read the arguments properly.
  */
@@ -107,7 +107,7 @@ public class ArgumentSequence
 	 * @param args the arguments of the command
 	 * @return the error message
 	 */
-	public String validate(List<String> args)
+	public String validateArguments(List<String> args)
 	{
 		// loop over argumentClasses instead of args to handle messages (arguments will be longer than argument classes)
 		for(int i = 0; i < this.argumentClasses.size(); i++)
@@ -115,7 +115,7 @@ public class ArgumentSequence
 			Class<?> clazz = this.argumentClasses.get(i);
 			String arg = args.get(i);
 
-			String errorMessage = validate(clazz, arg);
+			String errorMessage = validateArgument(clazz, arg);
 			if(errorMessage != null)
 				return errorMessage;
 		}
@@ -126,10 +126,10 @@ public class ArgumentSequence
 	/**
 	 * This method checks whether a supplied argument String fits the supplied class.
 	 * This doesn't always purely check if the String could be cast/converted to the type of the class.
-	 * For example it checks for Player.class whether the player is currently on the server.
+	 * For example it checks for {@code Player.class} whether the player is currently on the server.
 	 * <p>
 	 * The method returns a error message if the argument doesn't fit its template, if it properly fits, null is returned.
-	 * A special case of error message is the empty String: "". If this is returned, the provided argument just simply doesn't
+	 * A special case of error message is the empty String: {@code ""}. If this is returned, the provided argument just simply doesn't
 	 * fit the template and the standard message telling the player how to use the command should be displayed instead of
 	 * a special error message.
 	 *
@@ -137,7 +137,7 @@ public class ArgumentSequence
 	 * @param arg   the argument
 	 * @return error message, if one occured
 	 */
-	private String validate(Class<?> clazz, String arg)
+	private String validateArgument(Class<?> clazz, String arg)
 	{
 		// this returns "" when the argument is just straight out wrong. The message will be replaced by the usage message in the
 		// command executor before being sent to the player
@@ -194,15 +194,15 @@ public class ArgumentSequence
 	 * It still requires at least one argument to work, but from there no limits are set.
 	 * Currently only supported as the last argument for clarity purposes.
 	 * <p>
-	 * Example: /ban &lt;player&gt; [ban reason]<p>
-	 * The ArgumentSequence for this command would be: new ArgumentSequence(Player.class, ArgumentMessage.class);
+	 * Example: {@code /ban <player> [ban reason]}<p>
+	 * The ArgumentSequence for this command would be: {@code new ArgumentSequence(Player.class, ArgumentMessage.class)};
 	 * <p>
 	 * This accepts commands like that:<p>
-	 * - "/ban domisum Fly Hack" <p>
-	 * - "/ban Notch idk"
+	 * - {@code /ban domisum Fly Hack"} <p>
+	 * - {@code /ban Notch idk"}
 	 * <p>
 	 * But it doesn't allow:
-	 * - "/ban Notch"
+	 * - {@code /ban Notch}
 	 */
 	@APIUsage
 	public class ArgumentMessage

@@ -116,7 +116,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 		String highestPriorityValidationError = null;
 		for(ArgumentSequence as : fittingArgumentSequences)
 		{
-			String validationError = as.validate(args);
+			String validationError = as.validateArguments(args);
 			if(highestPriorityValidationError == null)
 				highestPriorityValidationError = validationError;
 
