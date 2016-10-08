@@ -5,7 +5,9 @@ import de.domisum.lib.mandatum.MandatumLib;
 import de.domisum.lib.mandatum.cmd.MandatumCommand;
 import de.domisum.lib.mandatum.cmd.MandatumSubCommand;
 import de.domisum.lib.mandatum.cmd.MandatumSuperCommand;
+import org.bukkit.command.CommandSender;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,7 +130,8 @@ public class MandatumCommandRegisterer
 		MandatumCommand command = null;
 		try
 		{
-			command = commandClazz.getConstructor().newInstance();
+			Constructor<?> constructor = commandClazz.getConstructor(CommandSender.class, List.class);
+			command = (MandatumCommand) constructor.newInstance(null, null);
 		}
 		catch(InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e)
 		{
