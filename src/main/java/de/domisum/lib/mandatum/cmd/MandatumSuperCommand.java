@@ -5,6 +5,7 @@ import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
 import de.domisum.lib.mandatum.MandatumLib;
 import org.bukkit.command.CommandSender;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +64,8 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 			MandatumSubCommand subCommand = null;
 			try
 			{
-				subCommand = (MandatumSubCommand) c.getConstructor().newInstance();
+				Constructor<?> constructor = c.getConstructor(CommandSender.class, List.class);
+				subCommand = (MandatumSubCommand) constructor.newInstance(null, null);
 			}
 			catch(InstantiationException|IllegalAccessException|IllegalArgumentException|InvocationTargetException|NoSuchMethodException|SecurityException e)
 			{
