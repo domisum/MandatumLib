@@ -14,7 +14,7 @@ public abstract class MandatumCommand
 	@APIUsage protected Player sender;
 	@APIUsage protected List<String> args;
 	@APIUsage protected String argumentSequenceName;
-	// this is not set in the constructor, since it will be determined after this object has been constructed
+	// these are not set in the constructor, since it will be determined after this object has been constructed
 
 
 	// -------
