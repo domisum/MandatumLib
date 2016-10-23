@@ -30,9 +30,6 @@ public class ArgumentSequence
 
 	// PROPERTIES
 	private String name;
-	/**
-	 * The classes of the arguments, in order.
-	 */
 	private List<Class<?>> argumentClasses;
 
 
@@ -75,9 +72,9 @@ public class ArgumentSequence
 	}
 
 
-	// -------
-	// VALIDATION
-	// -------
+	/*
+	** VALIDATION
+	*/
 
 	/**
 	 * Checks if the length of the supplied arguments fits the arguments specified in this Object.

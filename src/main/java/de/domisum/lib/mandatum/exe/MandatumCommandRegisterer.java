@@ -55,7 +55,11 @@ public class MandatumCommandRegisterer
 		MandatumLib.getLogger().info("Registering commands at '"+this.classPath+"' ...");
 
 		// get all commands listed in plugin.yml
-		Set<String> pluginCommands = MandatumLib.getInstance().getPlugin().getDescription().getCommands().keySet();
+		Map<String, Map<String, Object>> commandsMap = MandatumLib.getInstance().getPlugin().getDescription().getCommands();
+		if(commandsMap == null)
+			throw new IllegalArgumentException("The plugin does not have any commands specified in the plugin.yml file");
+
+		Set<String> pluginCommands = commandsMap.keySet();
 		// the returned set is immutable, so just copy it
 		pluginCommands = new HashSet<>(pluginCommands);
 
