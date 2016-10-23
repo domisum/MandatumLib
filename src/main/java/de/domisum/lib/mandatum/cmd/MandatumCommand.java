@@ -11,12 +11,9 @@ public abstract class MandatumCommand
 {
 
 	// REFERENCES
-	@APIUsage
-	protected Player sender;
-	@APIUsage
-	protected List<String> args;
-	@APIUsage
-	protected String argumentSequenceName;
+	@APIUsage protected Player sender;
+	@APIUsage protected List<String> args;
+	@APIUsage protected String argumentSequenceName;
 	// this is not set in the constructor, since it will be determined after this object has been constructed
 
 
@@ -92,7 +89,7 @@ public abstract class MandatumCommand
 
 	public void sendUsageMessage()
 	{
-		sendMessage("The command format is wrong: "+getUsage());
+		sendMessage("The command format is wrong. Please use: "+getUsage());
 	}
 
 
