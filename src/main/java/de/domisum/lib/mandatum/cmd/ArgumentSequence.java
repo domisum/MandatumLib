@@ -33,9 +33,7 @@ public class ArgumentSequence
 	private List<Class<?>> argumentClasses;
 
 
-	// -------
 	// CONSTRUCTOR
-	// -------
 
 	/**
 	 * Constructs an ArgumentSequence with the provided name and provided argument classes.
@@ -43,8 +41,7 @@ public class ArgumentSequence
 	 * @param name            The name of the ArgumentSequence
 	 * @param argumentClasses The classes of the Arguments
 	 */
-	@APIUsage
-	public ArgumentSequence(String name, Class<?>... argumentClasses)
+	@APIUsage public ArgumentSequence(String name, Class<?>... argumentClasses)
 	{
 		this(name, new ArrayList<>(Arrays.asList(argumentClasses)));
 	}
@@ -59,9 +56,7 @@ public class ArgumentSequence
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 
 	/**
 	 * @return The name of the ArgumentSequence
@@ -72,9 +67,7 @@ public class ArgumentSequence
 	}
 
 
-	/*
-	** VALIDATION
-	*/
+	// VALIDATION
 
 	/**
 	 * Checks if the length of the supplied arguments fits the arguments specified in this Object.
