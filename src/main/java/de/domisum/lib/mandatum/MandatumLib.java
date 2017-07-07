@@ -17,28 +17,23 @@ public class MandatumLib
 	private MandatumCommandExecutor commandExecutor;
 
 
-	// -------
 	// CONSTRUCTOR
-	// -------
 	private MandatumLib(JavaPlugin plugin)
 	{
-		instance = this;
 		this.plugin = plugin;
 
 		onEnable();
 	}
 
-	@APIUsage
-	public static void enable(JavaPlugin plugin)
+	@APIUsage public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
 
-		new MandatumLib(plugin);
+		instance = new MandatumLib(plugin);
 	}
 
-	@APIUsage
-	public static void disable()
+	@APIUsage public static void disable()
 	{
 		if(instance == null)
 			return;
@@ -60,9 +55,7 @@ public class MandatumLib
 	}
 
 
-	// -------
 	// GETTERS
-	// -------
 	public static MandatumLib getInstance()
 	{
 		return instance;
@@ -85,11 +78,8 @@ public class MandatumLib
 	}
 
 
-	// -------
 	// REGISTERING
-	// -------
-	@APIUsage
-	public static void registerCommands(String classPath)
+	@APIUsage public static void registerCommands(String classPath)
 	{
 		MandatumCommandRegisterer registerer = new MandatumCommandRegisterer(classPath);
 		getInstance().commandExecutor.addCommandClasses(registerer.getCommandClasses());
