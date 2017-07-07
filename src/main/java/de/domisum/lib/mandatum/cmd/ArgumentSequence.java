@@ -184,7 +184,7 @@ public class ArgumentSequence
 	 * It still requires at least one argument to work, but from there no limits are set.
 	 * Currently only supported as the last argument for clarity purposes.
 	 * <p>
-	 * Example: {@code /ban <player> [ban reason]}<p>
+	 * Example: {@code /ban <player> <ban reason>}<p>
 	 * The ArgumentSequence for this command would be: {@code new ArgumentSequence(Player.class, ArgumentMessage.class)};
 	 * <p>
 	 * This accepts commands like that:<p>
