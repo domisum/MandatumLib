@@ -42,6 +42,11 @@ public class MandatumCommandExecutor implements CommandExecutor
 	}
 
 
+	private void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, String[] args)
+	{
+		runCommand(commandClazz, sender, new ArrayList<>(Arrays.asList(args)));
+	}
+
 	public void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, List<String> args)
 	{
 		MandatumCommand command = getCommand(commandClazz, sender, args);
@@ -124,11 +129,6 @@ public class MandatumCommandExecutor implements CommandExecutor
 			command.sendUsageMessage();
 		else
 			command.sendMessage(highestPriorityValidationError);
-	}
-
-	private void runCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, String[] args)
-	{
-		runCommand(commandClazz, sender, new ArrayList<>(Arrays.asList(args)));
 	}
 
 
