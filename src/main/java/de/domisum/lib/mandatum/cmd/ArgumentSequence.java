@@ -169,7 +169,8 @@ public class ArgumentSequence
 				return "The uuid '"+arg+"' is invalid";
 		}
 		else
-			throw new RuntimeException("The class '"+clazz.getName()+"' has not been added to the validation method");
+			throw new UnsupportedOperationException(
+					"The class '"+clazz.getName()+"' has not been added to the validation method");
 
 		return null;
 	}
