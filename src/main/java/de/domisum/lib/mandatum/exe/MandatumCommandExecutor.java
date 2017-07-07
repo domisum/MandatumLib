@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public class MandatumCommandExecutor implements CommandExecutor
 {
@@ -51,31 +52,15 @@ public class MandatumCommandExecutor implements CommandExecutor
 	{
 		MandatumCommand command = getCommand(commandClazz, sender, args);
 
-		if(!command.canBeRunByConsole() && (command.getSender() == null))
+		if(!command.canBeRunByConsole() && command.getSender() == null)
 		{
 			command.sendMessage("This command cannot be used by the console.");
 			return;
 		}
 
-		permissionChecking:
-		{
-			// console
-			if(command.getSender() == null)
-				break permissionChecking;
-
-			if(command.getSender().isOp())
-				break permissionChecking;
-
-			String permissionNode = command.getRequiredPermissionNode();
-			if(permissionNode == null)
-				break permissionChecking;
-
-			if(command.getSender().hasPermission(permissionNode))
-				break permissionChecking;
-
-			command.sendMessage("You don't have permission to use this command.");
+		boolean hasPermission = checkCommandPermission(command);
+		if(!hasPermission)
 			return;
-		}
 
 		// don't check argument validity for supercommands, just pass them through
 		if(command instanceof MandatumSuperCommand)
@@ -90,26 +75,22 @@ public class MandatumCommandExecutor implements CommandExecutor
 			return;
 		}
 
-		// clone argumentSequences so the arraylist in the command class doesn't get altered
-		List<ArgumentSequence> fittingArgumentSequences = new ArrayList<>(command.getArgumentSequences());
-		fittingArgumentSequences.removeIf((as)->
-		{
-			// this takes messages in arguments into account
-			return !as.doesArgumentLengthFit(args);
-		});
 
-		if(fittingArgumentSequences.size() == 0)
+		// check if number of args fit the command
+		List<ArgumentSequence> fittingLengthArgumentSequences = getFittingLengthArgumentSequences(command, args);
+		if(fittingLengthArgumentSequences.size() == 0)
 		{
 			command.sendUsageMessage();
 			return;
 		}
 
-		String highestPriorityValidationError = null;
-		for(ArgumentSequence as : fittingArgumentSequences)
+		// now check if the args validation gives some errors
+		String highestPriorityArgumentSequenceError = null;
+		for(ArgumentSequence as : fittingLengthArgumentSequences)
 		{
 			String validationError = as.validateArguments(args);
-			if(highestPriorityValidationError == null)
-				highestPriorityValidationError = validationError;
+			if(highestPriorityArgumentSequenceError == null)
+				highestPriorityArgumentSequenceError = validationError;
 
 			// no errors
 			if(validationError == null)
@@ -125,10 +106,43 @@ public class MandatumCommandExecutor implements CommandExecutor
 
 		// the validator returns "" if the argument just doesn't fit, like a string instead of integer
 		// so this means just return the standard error message
-		if("".equals(highestPriorityValidationError))
+		if(Objects.equals(highestPriorityArgumentSequenceError, ""))
 			command.sendUsageMessage();
 		else
-			command.sendMessage(highestPriorityValidationError);
+			command.sendMessage(highestPriorityArgumentSequenceError);
+	}
+
+	private static boolean checkCommandPermission(MandatumCommand command)
+	{
+		// console
+		if(command.getSender() == null)
+			return true;
+
+		if(command.getSender().isOp())
+			return true;
+
+		String permissionNode = command.getRequiredPermissionNode();
+		if(permissionNode == null)
+			return true;
+
+		if(command.getSender().hasPermission(permissionNode))
+			return true;
+
+		command.sendMessage("You don't have permission to use this command.");
+		return false;
+	}
+
+	private static List<ArgumentSequence> getFittingLengthArgumentSequences(MandatumCommand command, List<String> args)
+	{
+		// clone argumentSequences so the ArrayList in the command class doesn't get changed
+		List<ArgumentSequence> fittingArgumentSequences = new ArrayList<>(command.getArgumentSequences());
+		fittingArgumentSequences.removeIf((as)->
+		{
+			// this takes messages in arguments into account
+			return !as.doesArgumentLengthFit(args);
+		});
+
+		return fittingArgumentSequences;
 	}
 
 
