@@ -82,10 +82,8 @@ public class ArgumentSequence
 	public boolean doesArgumentLengthFit(List<String> args)
 	{
 		// message at the end of the command
-		if(this.argumentClasses.size() > 0)
-			if(this.argumentClasses.get(this.argumentClasses.size()-1) == ArgumentMessage.class)
-				// message has to be at leas one long
-				return args.size() >= this.argumentClasses.size();
+		if(this.argumentClasses.size() > 0 && this.argumentClasses.get(this.argumentClasses.size()-1) == ArgumentMessage.class)
+			return args.size() >= this.argumentClasses.size(); // message has to have a length of at least one word
 
 		return args.size() == this.argumentClasses.size();
 	}
