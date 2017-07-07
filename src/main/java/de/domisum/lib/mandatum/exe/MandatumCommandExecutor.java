@@ -23,18 +23,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 	private Map<String, Class<? extends MandatumCommand>> commandClasses = new HashMap<>();
 
 
-	// -------
-	// CONSTRUCTOR
-	// -------
-	public MandatumCommandExecutor()
-	{
-
-	}
-
-
-	// -------
 	// CHANGERS
-	// -------
 	public void addCommandClasses(Map<String, Class<? extends MandatumCommand>> newCommandClasses)
 	{
 		// to lowercase so the the map can be searched by the lowercase commandname
@@ -43,11 +32,8 @@ public class MandatumCommandExecutor implements CommandExecutor
 	}
 
 
-	// -------
 	// COMMAND
-	// -------
-	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+	@Override public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
 	{
 		Class<? extends MandatumCommand> commandClazz = this.commandClasses.get(command.getName().toLowerCase());
 		runCommand(commandClazz, sender, args);
@@ -146,9 +132,7 @@ public class MandatumCommandExecutor implements CommandExecutor
 	}
 
 
-	// -------
 	// EXECUTION
-	// -------
 	private MandatumCommand getCommand(Class<? extends MandatumCommand> commandClazz, CommandSender sender, List<String> args)
 	{
 		Constructor<? extends MandatumCommand> constructor;
