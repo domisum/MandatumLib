@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.mandatum.exe.MandatumCommandExecutor;
 import de.domisum.lib.mandatum.exe.MandatumCommandRegisterer;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,7 +25,7 @@ public class MandatumLib
 		onEnable();
 	}
 
-	@APIUsage public static void enable(JavaPlugin plugin)
+	@API public static void enable(JavaPlugin plugin)
 	{
 		if(instance != null)
 			return;
@@ -33,7 +33,7 @@ public class MandatumLib
 		instance = new MandatumLib(plugin);
 	}
 
-	@APIUsage public static void disable()
+	@API public static void disable()
 	{
 		if(instance == null)
 			return;
@@ -79,7 +79,7 @@ public class MandatumLib
 
 
 	// REGISTERING
-	@APIUsage public static void registerCommands(String classPath)
+	@API public static void registerCommands(String classPath)
 	{
 		MandatumCommandRegisterer registerer = new MandatumCommandRegisterer(classPath);
 		getInstance().commandExecutor.addCommandClasses(registerer.getCommandClasses());

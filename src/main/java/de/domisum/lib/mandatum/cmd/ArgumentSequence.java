@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum.cmd;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -41,7 +41,7 @@ public class ArgumentSequence
 	 * @param name            The name of the ArgumentSequence
 	 * @param argumentClasses The classes of the Arguments
 	 */
-	@APIUsage public ArgumentSequence(String name, Class<?>... argumentClasses)
+	@API public ArgumentSequence(String name, Class<?>... argumentClasses)
 	{
 		this(name, new ArrayList<>(Arrays.asList(argumentClasses)));
 	}
@@ -193,7 +193,7 @@ public class ArgumentSequence
 	 * But it doesn't allow:
 	 * - {@code /ban Notch}
 	 */
-	@APIUsage
+	@API
 	public class ArgumentMessage
 	{
 

@@ -1,7 +1,7 @@
 package de.domisum.lib.mandatum.cmd;
 
 import de.domisum.lib.auxilium.util.java.ClazzUtil;
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.mandatum.MandatumLib;
 import org.bukkit.command.CommandSender;
 
@@ -42,7 +42,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 		return null;
 	}
 
-	@APIUsage
+	@API
 	public abstract String getSubCommandsClassPath();
 
 	@SuppressWarnings("unchecked")
@@ -139,7 +139,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	 *
 	 * @return if the subcommand should be executed
 	 */
-	@APIUsage
+	@API
 	protected abstract boolean shouldExecute();
 
 }

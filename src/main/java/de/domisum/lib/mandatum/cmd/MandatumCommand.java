@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum.cmd;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.mandatum.MandatumLib;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,16 +11,16 @@ public abstract class MandatumCommand
 {
 
 	// REFERENCES
-	@APIUsage protected Player sender;
-	@APIUsage protected List<String> args;
-	@APIUsage protected String argumentSequenceName;
+	@API protected Player sender;
+	@API protected List<String> args;
+	@API protected String argumentSequenceName;
 	// these are not set in the constructor, since it will be determined after this object has been constructed
 
 
 	// -------
 	// CONSTRUCTOR
 	// -------
-	@APIUsage
+	@API
 	protected MandatumCommand(CommandSender commandSender, List<String> args)
 	{
 		if(commandSender instanceof Player)
@@ -49,13 +49,13 @@ public abstract class MandatumCommand
 		return this.sender;
 	}
 
-	@APIUsage
+	@API
 	protected String getSenderName()
 	{
 		return this.sender != null ? ("'"+this.sender.getName()+"'") : "the console";
 	}
 
-	@APIUsage
+	@API
 	protected String getMessage(int startArgsIndex)
 	{
 		String message = "";

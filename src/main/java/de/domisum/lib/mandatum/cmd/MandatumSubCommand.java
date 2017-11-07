@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum.cmd;
 
-import de.domisum.lib.auxilium.util.java.annotations.APIUsage;
+import de.domisum.lib.auxilium.util.java.annotations.API;
 import org.bukkit.command.CommandSender;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public abstract class MandatumSubCommand extends MandatumCommand
 	// -------
 	// GETTERS
 	// -------
-	@APIUsage
+	@API
 	public abstract String getSuperCommandName();
 
 }
