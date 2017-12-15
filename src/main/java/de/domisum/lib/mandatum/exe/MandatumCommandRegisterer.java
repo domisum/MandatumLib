@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum.exe;
 
-import de.domisum.lib.auxilium.util.java.ClazzUtil;
+import de.domisum.lib.auxilium.util.java.ClassUtil;
 import de.domisum.lib.mandatum.MandatumLib;
 import de.domisum.lib.mandatum.cmd.MandatumCommand;
 import de.domisum.lib.mandatum.cmd.MandatumSubCommand;
@@ -64,7 +64,7 @@ public class MandatumCommandRegisterer
 		pluginCommands = new HashSet<>(pluginCommands);
 
 		// scan for the classes representing commands
-		List<Class<?>> classes = ClazzUtil.getClasses(this.classPath);
+		List<Class<?>> classes = ClassUtil.getClasses(this.classPath);
 		if(classes == null)
 			return;
 

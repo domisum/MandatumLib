@@ -1,6 +1,6 @@
 package de.domisum.lib.mandatum.cmd;
 
-import de.domisum.lib.auxilium.util.java.ClazzUtil;
+import de.domisum.lib.auxilium.util.java.ClassUtil;
 import de.domisum.lib.auxilium.util.java.annotations.API;
 import de.domisum.lib.mandatum.MandatumLib;
 import org.bukkit.command.CommandSender;
@@ -30,27 +30,23 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	// -------
 	// GETTERS
 	// -------
-	@Override
-	public String getUsage()
+	@Override public String getUsage()
 	{
 		return "/"+getName()+" <subcommand> [arguments of subcommand]";
 	}
 
-	@Override
-	public List<ArgumentSequence> getArgumentSequences()
+	@Override public List<ArgumentSequence> getArgumentSequences()
 	{
 		return null;
 	}
 
-	@API
-	public abstract String getSubCommandsClassPath();
+	@API public abstract String getSubCommandsClassPath();
 
-	@SuppressWarnings("unchecked")
-	protected Map<String, Class<? extends MandatumSubCommand>> findSubCommands()
+	@SuppressWarnings("unchecked") protected Map<String, Class<? extends MandatumSubCommand>> findSubCommands()
 	{
 		MandatumLib.getLogger().info("Registering subcommands of '"+getName()+"' ...");
 
-		List<Class<?>> classes = ClazzUtil.getClasses(getSubCommandsClassPath());
+		List<Class<?>> classes = ClassUtil.getClasses(getSubCommandsClassPath());
 		Map<String, Class<? extends MandatumSubCommand>> subCommandClasses = new HashMap<>();
 		for(Class<?> c : classes)
 		{
@@ -98,8 +94,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	// -------
 	// COMMUNICATION
 	// -------
-	@Override
-	public void sendUsageMessage()
+	@Override public void sendUsageMessage()
 	{
 		super.sendUsageMessage();
 		sendMessage("These subcommands exist:");
@@ -110,8 +105,7 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	// -------
 	// EXECUTION
 	// -------
-	@Override
-	public void execute()
+	@Override public void execute()
 	{
 		String subCommandName = this.args.get(0);
 		Class<? extends MandatumSubCommand> subCommand = getSubCommandClass(subCommandName.toLowerCase());
@@ -139,7 +133,6 @@ public abstract class MandatumSuperCommand extends MandatumCommand
 	 *
 	 * @return if the subcommand should be executed
 	 */
-	@API
-	protected abstract boolean shouldExecute();
+	@API protected abstract boolean shouldExecute();
 
 }
